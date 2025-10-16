@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GTM Solutions Limited — Your Trusted Distribution Partner in Africa</title>
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="GTM Solutions Limited — Your Trusted Distribution Partner in Africa" />
+  <meta property="og:description" content="Kenyan-based FMCG distribution and brand-building partner. Foods • Personal Care • Home Products." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=1200" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="description" content="GTM Corporation Limited is a Kenyan-based FMCG distribution and brand-building partner. Foods • Personal Care • Home Products." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- TailwindCSS (CDN build for quick deployment) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{ --brand:  #007B8A; --brand-600: #0F3C5C;   --accent: #E0A100; }
+    html{ scroll-behavior:smooth; }
+   body {
+  font-family: 'Inter';
+}
+
+/* Simple container utility to cap width */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Soft gradient background with brand blue */
+.hero-bg {
+  background: radial-gradient(
+      1200px 600px at 80% -10%,
+      rgba(224, 161, 0, 0.25),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #047F89 0%, #036871 70%);
+}
+
+/* Card design */
+.card {
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+</head>
+<body class="text-slate-800">
+  <!-- Top Nav -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b">
+    <div class="container flex items-center justify-between h-16">
+      <a href="#home" class="flex items-center gap-3 font-extrabold text-lg tracking-tight">
+        <a href="#home" class="flex items-center gap-4 font-extrabold tracking-tight">
+  <!-- logo display -->
+  <span class="inline-flex h-16 w-16 items-center justify-center rounded-full overflow-hidden bg-white border-2 border-[var(--brand)] relative animate-rotate-ball">
+  <img src="images/logo.png" alt="Go To Market Logo" class="object-cover h-full w-full absolute inset-0 keep-upright" />
+</span>
+
+<style>
+@keyframes rotate-ball {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.animate-rotate-ball {
+  animation: rotate-ball 6s linear infinite;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  position: relative;
+}
+
+/* Keep logo upright while parent rotates */
+.keep-upright {
+  animation: counter-rotate 6s linear infinite;
+  backface-visibility: hidden;
+}
+
+@keyframes counter-rotate {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(-360deg) rotateY(-360deg); }
+}
+</style>
+
+  <span class="text-xl md:text-xl font-bold text-[var(--brand)]">Go To Market Solutions Limited</span>
+</a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="#about" class="hover:text-[var(--brand)]">Who We Are</a>
+         <a href="market-overview.html" class="hover:text-[var(--brand)]">Our Market</a>
+        <a href="#services" class="hover:text-[var(--brand)]">Core Business</a>
+        <a href="#infrastructure" class="hover:text-[var(--brand)]">Our Structure & Infrastructure</a>
+        <a href="#why" class="hover:text-[var(--brand)]"> Why GTM</a>
+        <a href="#contact" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white" style="background:var(--brand)">Get in Touch</a>
+      </nav>
+      <button class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg" aria-label="Open menu" onclick="mobile.showModal()">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <dialog id="mobile" class="p-0 rounded-2xl w-11/12 max-w-sm">
+    <div class="p-6 space-y-4">
+      <div class="flex items-center justify-between">
+        <span class="font-bold">Menu</span>
+        <button class="h-9 w-9 inline-flex items-center justify-center rounded-lg" onclick="mobile.close()">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6"><path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="grid gap-2 text-sm">
+        <a href="#about" onclick="mobile.close()" class="py-2">Who We Are</a>
+        <a href="market-overview.html" class="hover:text-[var(--brand)]">Our Market</a>
+        <a href="#services" onclick="mobile.close()" class="py-2">Core Business</a>
+        <a href="#infrastructure" onclick="mobile.close()" class="py-2">Our Structure & Infrastructure/a>
+        <a href="#suppliers" onclick="mobile.close()" class="py-2">For Suppliers</a>
+        <a href="#why" onclick="mobile.close()" class="py-2"> Why GTM</a>
+        <a href="#contact" onclick="mobile.close()" class="py-2 font-semibold text-white rounded-lg text-center" style="background:var(--brand)">Get in Touch</a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Hero -->
+  <section id="home" class="hero-bg text-white">
+    <div class="container py-20 md:py-28">
+      <div class="max-w-3xl">
+        <span class="inline-block text-xs tracking-widest uppercase opacity-90">Foods • Personal Care • Home Products</span>
+        <h1 class="mt-3 text-3xl md:text-5xl font-extrabold leading-tight">Your Trusted Distribution Partner in Africa</h1>
+        <p class="mt-4 text-white/90 max-w-2xl">We connect <strong>quality FMCG brands</strong> to <strong>Kenyan households</strong> through <strong>reliable distribution</strong> and <strong>brand building</strong>.</p>
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a href="#contact" class="px-6 py-3 rounded-xl font-semibold text-slate-900" style="background:var(--accent)">Partner With Us</a>
+          <a href="#services" class="px-6 py-3 rounded-xl font-semibold border border-white/30">Discover Our Solutions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Who We Are -->
+  <section id="about" class="py-16 md:py-24 bg-white flex justify-center">
+  <div class="max-w-5xl px-6">
+    <!-- Who We Are -->
+    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 text-center">Who We Are</h2>
+    <p class="mt-6 text-lg leading-relaxed text-slate-700 text-justify">
+      Go To Market Solutions Limited (GTM) is an East Africa–based FMCG distribution and brand-building company dedicated to connecting quality brands with consumers across the region. We specialize in foods, personal care, and home care products that enhance everyday living. With an experienced management team and strong regional trade networks, GTM serves as a strategic bridge between brands and East African households, ensuring efficient market access, visibility, and growth.
+    </p>
+
+    <!-- Vision & Mission -->
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-slate-50 p-6 rounded-lg shadow">
+        <h3 class="font-semibold text-slate-800">Vision</h3>
+        <p class="mt-2 text-sm text-slate-600">
+          To be the partner of choice for suppliers of quality foods, personal care, and home products in East Africa.
+        </p>
+      </div>
+      <div class="bg-slate-50 p-6 rounded-lg shadow">
+        <h3 class="font-semibold text-slate-800">Mission</h3>
+        <p class="mt-2 text-sm text-slate-600">
+          Deliver trusted, high‑quality FMCG brands through efficient distribution, innovative marketing, and long‑term partnerships.
+        </p>
+      </div>
+    </div>
+
+   <!-- Core Values -->
+<section id="core-values" class="py-16 md:py-24 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl font-extrabold text-slate-900 text-center">Core Values</h2>
+
+    <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+
+      <!-- Integrity -->
+      <div class="bg-slate-50 p-6 rounded-lg shadow text-center">
+        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg text-white mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+               viewBox="0 0 24 24" 
+               fill="none" 
+               stroke="currentColor" 
+               stroke-width="1.5" 
+               class="w-8 h-8 text-black">
+            <path stroke-linecap="round" stroke-linejoin="round" 
+                  d="M12 3l8 4v5a8 8 0 11-16 0V7l8-4z" />
+            <path stroke-linecap="round" stroke-linejoin="round" 
+                  d="M9 12l2 2 4-4" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-black">Integrity</h3>
+        <p class="mt-2 text-sm text-slate-700">Building trust through transparency and accountability in all relationships.</p>
+      </div>
+
+      <!-- Excellence -->
+      <div class="bg-slate-50 p-6 rounded-lg shadow text-center">
+        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg text-white mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 24 24"
+               fill="none"
+               stroke="currentColor"
+               stroke-width="1.5"
+               class="w-8 h-8 text-black">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 2l2.9 6.26 6.9.54-5 4.73 1.48 6.81L12 17.77l-6.28 3.57L7.2 13.53l-5-4.73 6.9-.54L12 2z" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-black">Excellence</h3>
+        <p class="mt-2 text-sm text-slate-700">Striving for world-class execution and continuous improvement.</p>
+      </div>
+
+      <!-- Partnership -->
+<div class="bg-slate-50 p-6 rounded-lg shadow text-center">
+  <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg text-white mb-3">
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         viewBox="0 0 24 24" 
+         fill="none" 
+         stroke="currentColor" 
+         stroke-width="1.5" 
+         class="w-8 h-8 text-black">
+      <path stroke-linecap="round" stroke-linejoin="round" 
+            d="M3 12l3-3m15 3l-3-3M8.5 10.5l1.75 1.75a2 2 0 002.83 0l1.75-1.75m-8.33 2.83L4 17m16 0l-4.5-3.67m-11 3.67l2.5 2.5a2 2 0 002.83 0l1.34-1.34a1 1 0 011.41 0l1.34 1.34a2 2 0 002.83 0l2.5-2.5" />
+    </svg>
+  </div>
+  <h3 class="font-semibold text-black">Partnership</h3>
+  <p class="mt-2 text-sm text-slate-700">Fostering mutually beneficial collaborations with suppliers and trade partners.</p>
+</div>
+
+
+      <!-- Consumer Focus -->
+      <div class="bg-slate-50 p-6 rounded-lg shadow text-center">
+        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg text-white mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+               viewBox="0 0 24 24" 
+               fill="none" 
+               stroke="currentColor" 
+               stroke-width="1.5" 
+               class="w-8 h-8 text-black">
+            <path stroke-linecap="round" stroke-linejoin="round" 
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
+            <circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-black">Consumer Focus</h3>
+        <p class="mt-2 text-sm text-slate-700">Delivering products that enrich the everyday lives of East African families.</p>
+      </div>
+
+      <!-- Continuous Improvement -->
+      <div class="bg-slate-50 p-6 rounded-lg shadow text-center">
+        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg text-white mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 24 24"
+               fill="none"
+               stroke="currentColor"
+               stroke-width="1.5"
+               class="w-8 h-8 text-black">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M4 4v6h6M20 20v-6h-6M5.64 18.36A9 9 0 0018.36 5.64L20 4M4 20l1.64-1.64"/>
+          </svg>
+        </div>
+        <h3 class="font-semibold text-black">Continuous Improvement</h3>
+        <p class="mt-2 text-sm text-slate-700">Embracing innovation, adaptability, and efficiency to stay ahead.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Core Business -->
+  <section id="services" class="py-16 md:py-24">
+    <div class="container">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl md:text-3xl font-extrabold">Our Core Business</h2>
+        <p class="mt-4 text-slate-600">End‑to‑end solutions designed to build demand and deliver availability.</p>
+      </div>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="p-6 card bg-slate-50">
+          <div class="h-10 w-10 rounded-lg flex items-center justify-center mb-3" style="background:var(--brand);color:white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M3 7.5 12 3l9 4.5v9L12 21 3 16.5v-9Zm9 1.9L6 6.6l6 3 6-3-6 2.8Z"/></svg>
+          </div>
+          <h3 class="font-semibold">Sourcing & Supplying Quality FMCG Products:</h3>
+          <p class="mt-2 text-sm text-slate-700">Focused on foods, personal care, and home care products that meet international standards and local preferences.</p>
+        </div>
+        <div class="p-6 card bg-slate-50">
+  <div class="h-10 w-10 rounded-lg flex items-center justify-center mb-3" style="background:var(--brand);color:white">
+    <!-- Growth / Market Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.5"
+         class="h-5 w-5 text-white"
+         aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 20h18M6 16v-4m4 4V8m4 8v-6m4 6V5" />
+    </svg>
+  </div>
+  <h3 class="font-semibold">Market Entry & Brand Building</h3>
+  <p class="mt-2 text-sm text-slate-700">
+    Developing tailored go-to-market strategies that build brand awareness, drive consumer trial, and nurture long-term loyalty.
+  </p>
+</div>
+
+        <div class="p-6 card bg-slate-50">
+          <div class="h-10 w-10 rounded-lg flex items-center justify-center mb-3" style="background:var(--brand);color:white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true"><path fill="currentColor" d="M3 7h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Zm3-4h12v3H6V3Z"/></svg>
+          </div>
+          <h3 class="font-semibold">Distribution Partnerships</h3>
+          <p class="mt-2 text-sm text-slate-700">Connecting suppliers with both modern trade (organized retail and supermarket chains) and traditional trade (wholesalers, institutions, dukas, and kiosks) for comprehensive market coverage across East Africa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Structure & Infrastructure -->
+  <section id="infrastructure" class="py-16 md:py-24 bg-slate-50">
+    <div class="container">
+      <div class="max-w-3xl">
+        <h2 class="text-2xl md:text-3xl font-extrabold">Our Structure & Infrastructure</h2>
+        <p class="mt-4 text-slate-600">Reliable foundations that scale brands across Kenya.</p>
+      </div>
+      <div class="mt-10 grid md:grid-cols-2 gap-6">
+        <div class="p-6 card bg-white">
+          <h3 class="font-semibold">Modern Trade:</h3>
+          <p class="mt-2 text-sm text-slate-700">Strong partnerships with organized retail chains and supermarkets across key East African markets.</p>
+        </div>
+        <div class="p-6 card bg-white">
+          <h3 class="font-semibold">Traditional Trade:</h3>
+          <p class="mt-2 text-sm text-slate-700">Collaboration with wholesalers, distributors, and institutional buyers in urban and rural areas across the region.</p>
+        </div>
+        <div class="p-6 card bg-white">
+          <h3 class="font-semibold">Warehousing & Logistics</h3>
+          <p class="mt-2 text-sm text-slate-700">Strategically located regional hubs enabling efficient, secure, and scalable distribution across East African borders.</p>
+        </div>
+        <div class="p-6 card bg-white">
+          <h3 class="font-semibold">Sales & Marketing Teams</h3>
+          <p class="mt-2 text-sm text-slate-700">Skilled professionals trained in in-store execution, promotions, merchandising, and market activation.</p>
+        </div>
+        <div class="p-6 card bg-white">
+          <h3 class="font-semibold">Technology Support</h3>
+          <p class="mt-2 text-sm text-slate-700">Digitized systems for stock management, order processing, and real-time performance tracking, ensuring efficiency and transparency.</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+<!-- Visuals ribbon -->
+
+<section>
+     <div class="relative w-full overflow-hidden rounded-2xl shadow-lg">
+  <div id="carousel" class="flex transition-transform duration-700 ease-in-out">
+   <img src="images/packaging.png" alt="Warehouse operations" class="w-full h-auto object-contain flex-shrink-0">
+    <img src="images/workers.png" alt="Logistics fleet" class="w-full h-auto object-contain flex-shrink-0">
+    <img src="images/supervisor.png" alt="FMCG pallets" class="w-full h-auto object-contain flex-shrink-0">
+    <img src="images/packaging.png" alt="Retail aisle" class="w-full h-auto object-contain flex-shrink-0">
+    <img src="images/teamwork.png" alt="Sales team" class="w-full h-auto object-contain flex-shrink-0">
+    <img src="images/delivery.png" alt="Distribution team" class="w-full h-auto object-contain flex-shrink-0">
+    <img src="images/delivery2.png" alt="Stock arrangement" class="w-full h-auto object-contain flex-shrink-0">
+  </div>
+
+  <!-- Prev/Next buttons -->
+  <button onclick="moveSlide(-1)" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white/70 p-2 rounded-full hover:bg-white shadow">
+    &#10094;
+  </button>
+  <button onclick="moveSlide(1)" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white/70 p-2 rounded-full hover:bg-white shadow">
+    &#10095;
+  </button>
+</div>
+
+<script>
+  const carousel = document.getElementById('carousel');
+  let index = 0;
+
+  function moveSlide(step) {
+    const total = carousel.children.length;
+    index = (index + step + total) % total;
+    carousel.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  // Auto-slide every 4 seconds
+  setInterval(() => moveSlide(1), 4000);
+</script>
+
+    
+  </section>
+
+ 
+   
+
+  <!--  Why Partner With Go To Market Solutions Limited -->
+  <section id="why" class="py-16 md:py-24 bg-slate-50">
+    <div class="container grid md:grid-cols-2 gap-10 items-start">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-extrabold">Why Partner With Go To Market Solutions Limited</h2>
+        <ul class="mt-6 space-y-3 text-slate-700 list-disc pl-5">
+          <li>The East African FMCG market is among Africa’s fastest-growing consumer economies, driven by urbanization, population growth, and evolving lifestyles.</li>
+          <li>Consumers are increasingly seeking trusted, affordable, and high-quality brands in foods, personal care, and home care categories.</li>
+          <li>GTM provides end-to-end route-to-market solutions, ensuring rapid market penetration, visibility, and sustainable growth.</li>
+          <li>We believe in long-term, value-based partnerships, treating every supplier’s brand as our own and investing in shared success.</li>
+        </ul>
+      </div>
+      
+  </section>
+
+<!-- Closing CTA -->
+<section class="py-16 md:py-24 text-white" style="background:var(--brand)">
+  <div class="container mx-auto text-center max-w-5xl">
+    <h2 class="text-2xl md:text-3xl font-extrabold leading-snug">
+      At Go To Market Solutions Limited, we don’t just move products — we build lasting brands.<br />
+      We connect global and local suppliers with East African consumers through efficient distribution, strategic marketing, and strong partnerships.
+    </h2>
+    <p class="mt-6 text-white/90 text-base md:text-lg leading-relaxed">
+      By partnering with us, suppliers of foods, personal care, and home care products gain a reliable regional ally committed to driving visibility, growth, and long-term brand success in one of Africa’s most dynamic markets.
+    </p>
+
+    <div class="mt-8">
+      <a href="#contact"
+         class="inline-flex px-8 py-3 rounded-xl font-semibold text-slate-900 transition duration-300 hover:opacity-90"
+         style="background:var(--accent)">
+        Get in Touch
+      </a>
+    </div>
+  </div>
+</section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-16 md:py-24 bg-white">
+    <div class="container">
+      <div class="max-w-2xl">
+        <h2 class="text-2xl md:text-3xl font-extrabold">Contact Us</h2>
+        <p class="mt-3 text-slate-600">Tell us about your brand and goals in Kenya/East Africa.</p>
+      </div>
+
+      <!-- Formspree-ready form (replace action with your endpoint) -->
+      <form class="mt-8 grid gap-4 max-w-2xl" action="https://formspree.io/f/mzzjazgj" method="POST">
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm font-medium" for="name">Name</label>
+            <input id="name" name="name" required class="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--brand)]" placeholder="Your full name" />
+          </div>
+          <div>
+            <label class="text-sm font-medium" for="company">Company</label>
+            <input id="company" name="company" class="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--brand)]" placeholder="Company name" />
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm font-medium" for="email">Email</label>
+            <input id="email" type="email" name="email" required class="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--brand)]" placeholder="name@company.com" />
+          </div>
+          <div>
+            <label class="text-sm font-medium" for="phone">Phone</label>
+            <input id="phone" name="phone" class="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--brand)]" placeholder="Optional" />
+          </div>
+        </div>
+        <div>
+          <label class="text-sm font-medium" for="message">How can we help?</label>
+          <textarea id="message" name="message" rows="5" required class="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--brand)]" placeholder="Tell us about your product categories and goals..."></textarea>
+        </div>
+        <div class="flex items-center gap-3">
+          <button type="submit" class="px-6 py-3 rounded-xl font-semibold text-white" style="background:var(--brand)">Send Inquiry</button>
+          <p class="text-xs text-slate-500">By submitting, you agree to our processing of your information to respond to your inquiry.</p>
+        </div>
+      </form>
+
+      <!-- Static contact details (replace with real info) -->
+      <div class="mt-10 grid md:grid-cols-3 gap-6 text-sm">
+        <div class="p-5 card bg-slate-50">
+          <p class="font-semibold">Email</p>
+          <p class="mt-1 text-slate-700"><a href="mailto:info@gotomarktetsolutions.co.ke" class="underline">info@gotomarketsolutions.co.ke</a></p>
+          <p class="mt-1 text-slate-700"><a href="mailto:sales@gotomarketsolutions.co.ke" class="underline">sales@gotomarketsolutions.co.ke</a></p>
+          </div>
+        <div class="p-5 card bg-slate-50">
+          <p class="font-semibold">Phone</p>
+          <p class="mt-1 text-slate-700">+254 722 422 721</p>
+        </div>
+        <div class="p-5 card bg-slate-50">
+          <p class="font-semibold">Location</p>
+          <p class="mt-1 text-slate-700">Nairobi, Kenya</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t">
+    <div class="container py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-sm">© <span id="year"></span> GTM Solutions Limited. All rights reserved.</p>
+      <div class="flex items-center gap-4 text-sm">
+        <a href="#" class="underline">Privacy</a>
+        <a href="#home" class="underline">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // If using Formspree: set form action to your endpoint and remove preventDefault.
+    // When you have your real Formspree endpoint, submissions will post directly.
+    // No JS needed unless you want custom success/failure UI.
+      alert('Thanks! This demo form is ready for Formspree / EmailJS.');
+    ;
+  </script>
+</body>
+</html>

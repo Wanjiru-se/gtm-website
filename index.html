@@ -13,41 +13,67 @@
   <meta name="description" content="GTM Corporation Limited is a Kenyan-based FMCG distribution and brand-building partner. Foods • Personal Care • Home Products." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Poppins (headings) + Lato (body) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
   <!-- TailwindCSS (CDN build for quick deployment) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{ --brand:  #007B8A; --brand-600: #0F3C5C;   --accent: #E0A100; }
     html{ scroll-behavior:smooth; }
-   body {
-  font-family: 'Inter';
-}
+    /* Body text: Lato */
+    body {
+      font-family: 'Lato', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+    /* Headings: Poppins */
+    h1, h2, h3, h4, h5, h6,
+    .heading, .hero-title, .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600; /* bump to 700 on big hero if you like */
+      letter-spacing: -0.3px;
+    }
 
-/* Simple container utility to cap width */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
+    /* Simple container utility to cap width */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
 
-/* Soft gradient background with brand blue */
-.hero-bg {
-  background: radial-gradient(
-      1200px 600px at 80% -10%,
-      rgba(224, 161, 0, 0.25),
-      transparent 60%
-    ),
-    linear-gradient(180deg, #047F89 0%, #036871 70%);
-}
+    /* Soft gradient background with brand blue */
+    .hero-bg {
+      background: radial-gradient(
+          1200px 600px at 80% -10%,
+          rgba(224, 161, 0, 0.25),
+          transparent 60%
+        ),
+        linear-gradient(180deg, #047F89 0%, #036871 70%);
+    }
 
-/* Card design */
-.card {
-  border-radius: 1rem;
-  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.2);
-}
+    /* Card design */
+    .card {
+      border-radius: 1rem;
+      box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.2);
+    }
 
-</style>
+  </style>
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const selectors = [
+          '[data-carousel-prev]',
+          '[data-carousel-next]',
+          '.swiper-button-prev',
+          '.swiper-button-next',
+          '.glide__arrow',
+          '.glide__arrow--left',
+          '.glide__arrow--right',
+          'button[aria-label="Previous slide"]',
+          'button[aria-label="Next slide"]'
+        ];
+        document.querySelectorAll(selectors.join(',')).forEach(el => el.remove());
+      });
+    </script>
+
 </head>
 <body class="text-slate-800">
   <!-- Top Nav -->
@@ -129,7 +155,7 @@
       <div class="max-w-3xl">
         <span class="inline-block text-xs tracking-widest uppercase opacity-90">Foods • Personal Care • Home Products</span>
         <h1 class="mt-3 text-3xl md:text-5xl font-extrabold leading-tight">Your Trusted Distribution Partner in Africa</h1>
-        <p class="mt-4 text-white/90 max-w-2xl">We connect <strong>quality FMCG brands</strong> to <strong>Kenyan households</strong> through <strong>reliable distribution</strong> and <strong>brand building</strong>.</p>
+        <p class="mt-4 text-white/90 max-w-2xl">We connect <strong>quality FMCG brands</strong> to <strong>consumers across East Africa</strong> anchored in <strong>in Kenya</strong> through <strong>reliable distribution and brand building</strong>.</p>
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <a href="#contact" class="px-6 py-3 rounded-xl font-semibold text-slate-900" style="background:var(--accent)">Partner With Us</a>
           <a href="#services" class="px-6 py-3 rounded-xl font-semibold border border-white/30">Discover Our Solutions</a>
@@ -139,137 +165,265 @@
   </section>
 
   
-  <!-- Who We Are -->
-  <section id="about" class="py-16 md:py-24 bg-white flex justify-center">
-  <div class="max-w-5xl px-6">
-    <!-- Who We Are -->
-    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 text-center">Who We Are</h2>
-    <p class="mt-6 text-lg leading-relaxed text-slate-700 text-justify">
-      Go To Market Solutions Limited (GTM) is an East Africa–based FMCG distribution and brand-building company dedicated to connecting quality brands with consumers across the region. We specialize in foods, personal care, and home care products that enhance everyday living. With an experienced management team and strong regional trade networks, GTM serves as a strategic bridge between brands and East African households, ensuring efficient market access, visibility, and growth.
+ <!-- What We Do -->
+<section id="about" class="py-16 md:py-24 bg-slate-50 flex justify-center">
+
+
+  <div class="max-w-5xl w-full px-6 bg-white rounded-2xl shadow-sm ring-1 ring-slate-100">
+
+
+   
+
+    <p class="mt-4 text-base md:text-lg leading-relaxed text-slate-700 text-center max-w-3xl mx-auto">
+      Go To Market Solutions Limited (GTM) connects quality FMCG brands with consumers across East Africa—delivering access, visibility, and growth.
     </p>
 
-    <!-- Vision & Mission -->
+    <!-- Highlight bullets -->
+     <ul class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
+  <!-- card -->
+  <li class="reveal-on-scroll opacity-0 translate-y-3 bg-slate-50 border border-slate-100 rounded-xl p-4 flex items-start gap-3">
+    <span class="shrink-0 text-xl"></span>
+    <div class="text-slate-700"><strong>East Africa reach</strong>, anchored in Kenya as our strategic hub.</div>
+  </li>
+
+  <li class="reveal-on-scroll opacity-0 translate-y-3 bg-slate-50 border border-slate-100 rounded-xl p-4 flex items-start gap-3">
+    <span class="shrink-0 text-xl"></span>
+    <div class="text-slate-700"><strong>Category focus</strong>: foods, personal care, and home care products.</div>
+  </li>
+
+  <li class="reveal-on-scroll opacity-0 translate-y-3 bg-slate-50 border border-slate-100 rounded-xl p-4 flex items-start gap-3">
+    <span class="shrink-0 text-xl"></span>
+    <div class="text-slate-700"><strong>Experienced management</strong> with strong regional trade networks.</div>
+  </li>
+
+  <li class="reveal-on-scroll opacity-0 translate-y-3 bg-slate-50 border border-slate-100 rounded-xl p-4 flex items-start gap-3">
+    <span class="shrink-0 text-xl"></span>
+    <div class="text-slate-700"><strong>Bridge to households</strong>—driving access, visibility, and growth.</div>
+  </li>
+</ul>
+<div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl mx-auto">
+  <div class="reveal-on-scroll opacity-0 translate-y-2 bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-2xl font-bold text-[var(--gtm-blue)]">6+ Markets</div>
+    <div class="text-sm text-slate-600">EAC & neighbors</div>
+  </div>
+  <div class="reveal-on-scroll opacity-0 translate-y-2 bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-2xl font-bold text-[var(--gtm-blue)]">90%+</div>
+    <div class="text-sm text-slate-600">Mobile-first consumers</div>
+  </div>
+  <div class="reveal-on-scroll opacity-0 translate-y-2 bg-white border border-slate-200 rounded-xl p-4 text-center">
+    <div class="text-2xl font-bold text-[var(--gtm-blue)]">Kenya</div>
+    <div class="text-sm text-slate-600">Our regional hub</div>
+  </div>
+</div>
+
+
+  </div>
+</section>
+
+<!-- Local styles for reveal speed & smoothness -->
+<style>
+  #about .reveal-on-scroll{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity var(--reveal-dur,700ms) ease, transform var(--reveal-dur,700ms) ease;
+    will-change: opacity, transform;
+  }
+  #about .reveal-on-scroll.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+  /* Toggle animation feel by switching data-anim on the section */
+  #about[data-anim="smooth"] { --reveal-dur: 1100ms; }  /* slower & smoother */
+  #about[data-anim="snappy"] { --reveal-dur: 450ms; }   /* faster & punchier */
+</style>
+
+<!-- Tiny observer just for this section -->
+<script>
+  (function () {
+    const scope = document.querySelector('#about');
+    if (!scope) return;
+    const items = scope.querySelectorAll('.reveal-on-scroll');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('in-view'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    items.forEach(el => io.observe(el));
+  })();
+</script>
+
+
+<!-- Scroll Animation Script -->
+<script>
+  const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', '-translate-x-6');
+        entry.target.classList.add('opacity-100', 'translate-x-0');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  revealElements.forEach(el => observer.observe(el));
+</script>
+
+
+    <!-- Vision & Mission (kept on-brand, tidied typography) -->
     <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-slate-50 p-6 rounded-lg shadow">
-        <h3 class="font-semibold text-slate-800">Vision</h3>
-        <p class="mt-2 text-sm text-slate-600">
+        <h3 class="text-lg md:text-xl font-semibold text-slate-800">Vision</h3>
+        <p class="mt-2 text-sm md:text-base text-slate-600">
           To be the partner of choice for suppliers of quality foods, personal care, and home products in East Africa.
         </p>
       </div>
       <div class="bg-slate-50 p-6 rounded-lg shadow">
-        <h3 class="font-semibold text-slate-800">Mission</h3>
-        <p class="mt-2 text-sm text-slate-600">
-          Deliver trusted, high‑quality FMCG brands through efficient distribution, innovative marketing, and long‑term partnerships.
+        <h3 class="text-lg md:text-xl font-semibold text-slate-800">Mission</h3>
+        <p class="mt-2 text-sm md:text-base text-slate-600">
+          Deliver trusted, high-quality FMCG brands through efficient distribution, innovative marketing, and long-term partnerships.
         </p>
       </div>
     </div>
+  </div>
+</section>
 
-   <!-- Core Values -->
-<section id="core-values" class="py-16 md:py-24 bg-white">
+<!-- Reveal-on-scroll script (include once on the page) -->
+<script>
+  (function () {
+    const els = document.querySelectorAll('.reveal-on-scroll');
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: show immediately
+      els.forEach(el => el.classList.remove('opacity-0','translate-y-4'));
+      return;
+    }
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0','translate-y-4');
+          entry.target.classList.add('opacity-100','translate-y-0');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(el => obs.observe(el));
+  })();
+</script>
+
+   
+<!-- Core Values -->
+<section id="core-values" class="pt-14 md:pt-20 pb-8 md:pb-10 bg-white">
   <div class="container mx-auto px-4">
-    <h2 class="text-2xl font-extrabold text-slate-900 text-center">Core Values</h2>
+    <h2 class="text-3xl font-extrabold text-slate-900 text-left">Core Values</h2>
 
     <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
 
       <!-- Integrity -->
-      <div class="bg-slate-50 p-6 rounded-lg shadow text-center">
-        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg text-white mb-3">
-          <svg xmlns="http://www.w3.org/2000/svg" 
-               viewBox="0 0 24 24" 
-               fill="none" 
-               stroke="currentColor" 
-               stroke-width="1.5" 
-               class="w-8 h-8 text-black">
-            <path stroke-linecap="round" stroke-linejoin="round" 
-                  d="M12 3l8 4v5a8 8 0 11-16 0V7l8-4z" />
-            <path stroke-linecap="round" stroke-linejoin="round" 
-                  d="M9 12l2 2 4-4" />
+      <div class="bg-slate-50 p-6 rounded-xl shadow-sm border border-slate-100 text-center">
+        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg mb-3">
+          <!-- Shield Check -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="1.5"
+               class="w-8 h-8 text-[var(--gtm-blue)]">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 3l7 4v5a7 7 0 11-14 0V7l7-4z"/>
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M9 12l2 2 4-4"/>
           </svg>
         </div>
-        <h3 class="font-semibold text-black">Integrity</h3>
-        <p class="mt-2 text-sm text-slate-700">Building trust through transparency and accountability in all relationships.</p>
+        <h3 class="font-semibold text-slate-900">Integrity</h3>
+        <p class="mt-2 text-sm text-slate-700">
+          Building trust through transparency and accountability in all relationships.
+        </p>
       </div>
 
       <!-- Excellence -->
-      <div class="bg-slate-50 p-6 rounded-lg shadow text-center">
-        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg text-white mb-3">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="1.5"
-               class="w-8 h-8 text-black">
+      <div class="bg-slate-50 p-6 rounded-xl shadow-sm border border-slate-100 text-center">
+        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg mb-3">
+          <!-- Star -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="1.5"
+               class="w-8 h-8 text-[var(--gtm-blue)]">
             <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M12 2l2.9 6.26 6.9.54-5 4.73 1.48 6.81L12 17.77l-6.28 3.57L7.2 13.53l-5-4.73 6.9-.54L12 2z" />
+                  d="M12 17.25l-5.197 2.73 1-5.828-4.234-4.127 5.848-.85L12 3.5l2.583 5.675 5.848.85-4.234 4.127 1 5.828L12 17.25z"/>
           </svg>
         </div>
-        <h3 class="font-semibold text-black">Excellence</h3>
-        <p class="mt-2 text-sm text-slate-700">Striving for world-class execution and continuous improvement.</p>
+        <h3 class="font-semibold text-slate-900">Excellence</h3>
+        <p class="mt-2 text-sm text-slate-700">
+          Striving for world-class execution and continuous improvement.
+        </p>
       </div>
 
       <!-- Partnership -->
-<div class="bg-slate-50 p-6 rounded-lg shadow text-center">
-  <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg text-white mb-3">
-    <svg xmlns="http://www.w3.org/2000/svg" 
-         viewBox="0 0 24 24" 
-         fill="none" 
-         stroke="currentColor" 
-         stroke-width="1.5" 
-         class="w-8 h-8 text-black">
-      <path stroke-linecap="round" stroke-linejoin="round" 
-            d="M3 12l3-3m15 3l-3-3M8.5 10.5l1.75 1.75a2 2 0 002.83 0l1.75-1.75m-8.33 2.83L4 17m16 0l-4.5-3.67m-11 3.67l2.5 2.5a2 2 0 002.83 0l1.34-1.34a1 1 0 011.41 0l1.34 1.34a2 2 0 002.83 0l2.5-2.5" />
-    </svg>
-  </div>
-  <h3 class="font-semibold text-black">Partnership</h3>
-  <p class="mt-2 text-sm text-slate-700">Fostering mutually beneficial collaborations with suppliers and trade partners.</p>
-</div>
-
-
-      <!-- Consumer Focus -->
-      <div class="bg-slate-50 p-6 rounded-lg shadow text-center">
-        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg text-white mb-3">
-          <svg xmlns="http://www.w3.org/2000/svg" 
-               viewBox="0 0 24 24" 
-               fill="none" 
-               stroke="currentColor" 
-               stroke-width="1.5" 
-               class="w-8 h-8 text-black">
-            <path stroke-linecap="round" stroke-linejoin="round" 
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5s8.268 2.943 9.542 7c-1.274 4.057-5.065 7-9.542 7s-8.268-2.943-9.542-7z" />
-            <circle cx="12" cy="12" r="3" stroke-linecap="round" stroke-linejoin="round" />
+      <div class="bg-slate-50 p-6 rounded-xl shadow-sm border border-slate-100 text-center">
+        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg mb-3">
+          <!-- Handshake -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="1.5"
+               class="w-8 h-8 text-[var(--gtm-blue)]">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M8.5 12l3-3 3 3m-8.5 1.5l3.5 3.5a2.5 2.5 0 003.5 0l5-5a2.5 2.5 0 000-3.5l-.5-.5a2.5 2.5 0 00-3.5 0L12 8"/>
           </svg>
         </div>
-        <h3 class="font-semibold text-black">Consumer Focus</h3>
-        <p class="mt-2 text-sm text-slate-700">Delivering products that enrich the everyday lives of East African families.</p>
+        <h3 class="font-semibold text-slate-900">Partnership</h3>
+        <p class="mt-2 text-sm text-slate-700">
+          Fostering mutually beneficial collaborations with suppliers and trade partners.
+        </p>
+      </div>
+
+      <!-- Consumer Focus -->
+      <div class="bg-slate-50 p-6 rounded-xl shadow-sm border border-slate-100 text-center">
+        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg mb-3">
+          <!-- Eye -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="1.5"
+               class="w-8 h-8 text-[var(--gtm-blue)]">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/>
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-slate-900">Consumer Focus</h3>
+        <p class="mt-2 text-sm text-slate-700">
+          Delivering products that enrich the everyday lives of East African families.
+        </p>
       </div>
 
       <!-- Continuous Improvement -->
-      <div class="bg-slate-50 p-6 rounded-lg shadow text-center">
-        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg text-white mb-3">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="1.5"
-               class="w-8 h-8 text-black">
+      <div class="bg-slate-50 p-6 rounded-xl shadow-sm border border-slate-100 text-center">
+        <div class="mx-auto h-10 w-10 flex items-center justify-center rounded-lg mb-3">
+          <!-- Trending Up -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="1.5"
+               class="w-8 h-8 text-[var(--gtm-blue)]">
             <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M4 4v6h6M20 20v-6h-6M5.64 18.36A9 9 0 0018.36 5.64L20 4M4 20l1.64-1.64"/>
+                  d="M3 17l6-6 4 4 7-7M21 7h-5m5 0v5"/>
           </svg>
         </div>
-        <h3 class="font-semibold text-black">Continuous Improvement</h3>
-        <p class="mt-2 text-sm text-slate-700">Embracing innovation, adaptability, and efficiency to stay ahead.</p>
+        <h3 class="font-semibold text-slate-900">Continuous Improvement</h3>
+        <p class="mt-2 text-sm text-slate-700">
+          Embracing innovation, adaptability, and efficiency to stay ahead.
+        </p>
       </div>
 
     </div>
   </div>
 </section>
 
+
 <!-- Core Business -->
-  <section id="services" class="py-16 md:py-24">
+  <section id="services" class="pt-8 md:pt-10 pb-16 md:pb-20">
     <div class="container">
       <div class="max-w-3xl">
         <h2 class="text-2xl md:text-3xl font-extrabold">Our Core Business</h2>
-        <p class="mt-4 text-slate-600">End‑to‑end solutions designed to build demand and deliver availability.</p>
+        <p class="mt-4 text-slate-600">End-to-end solutions designed to build demand and deliver availability.</p>
       </div>
       <div class="mt-10 grid md:grid-cols-3 gap-6">
         <div class="p-6 card bg-slate-50">
@@ -311,7 +465,7 @@
   </section>
 
   <!-- Our Structure & Infrastructure -->
-  <section id="infrastructure" class="py-16 md:py-24 bg-slate-50">
+  <section id="infrastructure" class="pt-8 md:pt-10 pb-16 md:pb-20">
     <div class="container">
       <div class="max-w-3xl">
         <h2 class="text-2xl md:text-3xl font-extrabold">Our Structure & Infrastructure</h2>
@@ -344,26 +498,69 @@
   </section>
 
 <!-- Visuals ribbon -->
+<section class="py-10">
+  <div class="container mx-auto max-w-5xl px-4">
+    <div class="relative w-full overflow-hidden rounded-2xl shadow-lg">
+      <!-- Height capped so images don't feel overwhelming -->
+      <div id="carousel" class="flex gap-4 transition-transform duration-700 ease-in-out">
+        <img src="images/packaging.png"  alt="Warehouse operations"
+             class="w-full h-[300px] md:h-[420px] object-cover flex-shrink-0 rounded-xl
+                    opacity-0 -translate-x-6 transition-all duration-700 ease-out reveal-slide-left"
+             style="transition-delay:0ms" />
 
-<section>
-     <div class="relative w-full overflow-hidden rounded-2xl shadow-lg">
-  <div id="carousel" class="flex transition-transform duration-700 ease-in-out">
-   <img src="images/packaging.png" alt="Warehouse operations" class="w-full h-auto object-contain flex-shrink-0">
-    <img src="images/workers.png" alt="Logistics fleet" class="w-full h-auto object-contain flex-shrink-0">
-    <img src="images/supervisor.png" alt="FMCG pallets" class="w-full h-auto object-contain flex-shrink-0">
-    <img src="images/packaging.png" alt="Retail aisle" class="w-full h-auto object-contain flex-shrink-0">
-    <img src="images/teamwork.png" alt="Sales team" class="w-full h-auto object-contain flex-shrink-0">
-    <img src="images/delivery.png" alt="Distribution team" class="w-full h-auto object-contain flex-shrink-0">
-    <img src="images/delivery2.png" alt="Stock arrangement" class="w-full h-auto object-contain flex-shrink-0">
+        <img src="images/workers.png"    alt="Logistics fleet"
+             class="w-full h-[300px] md:h-[420px] object-cover flex-shrink-0 rounded-xl
+                    opacity-0 -translate-x-6 transition-all duration-700 ease-out reveal-slide-left"
+             style="transition-delay:120ms" />
+
+        <img src="images/supervisor.png" alt="FMCG pallets"
+             class="w-full h-[300px] md:h-[420px] object-cover flex-shrink-0 rounded-xl
+                    opacity-0 -translate-x-6 transition-all duration-700 ease-out reveal-slide-left"
+             style="transition-delay:240ms" />
+
+        <img src="images/packaging.png"  alt="Retail aisle"
+             class="w-full h-[300px] md:h-[420px] object-cover flex-shrink-0 rounded-xl
+                    opacity-0 -translate-x-6 transition-all duration-700 ease-out reveal-slide-left"
+             style="transition-delay:360ms" />
+
+        <img src="images/teamwork.png"   alt="Sales team"
+             class="w-full h-[300px] md:h-[420px] object-cover flex-shrink-0 rounded-xl
+                    opacity-0 -translate-x-6 transition-all duration-700 ease-out reveal-slide-left"
+             style="transition-delay:480ms" />
+
+        <img src="images/delivery.png"   alt="Distribution team"
+             class="w-full h-[300px] md:h-[420px] object-cover flex-shrink-0 rounded-xl
+                    opacity-0 -translate-x-6 transition-all duration-700 ease-out reveal-slide-left"
+             style="transition-delay:600ms" />
+
+        <img src="images/delivery2.png"  alt="Stock arrangement"
+             class="w-full h-[300px] md:h-[420px] object-cover flex-shrink-0 rounded-xl
+                    opacity-0 -translate-x-6 transition-all duration-700 ease-out reveal-slide-left"
+             style="transition-delay:720ms" />
+      </div>
+    </div>
   </div>
+</section>
+<script>
+  (function () {
+    const slides = document.querySelectorAll('.reveal-slide-left');
+    if (!('IntersectionObserver' in window)) {
+      slides.forEach(el => el.classList.remove('opacity-0','-translate-x-6'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.remove('opacity-0','-translate-x-6');
+          e.target.classList.add('opacity-100','translate-x-0');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    slides.forEach(el => io.observe(el));
+  })();
+</script>
 
-  <!-- Prev/Next buttons -->
-  <button onclick="moveSlide(-1)" class="absolute top-1/2 left-4 -translate-y-1/2 bg-white/70 p-2 rounded-full hover:bg-white shadow">
-    &#10094;
-  </button>
-  <button onclick="moveSlide(1)" class="absolute top-1/2 right-4 -translate-y-1/2 bg-white/70 p-2 rounded-full hover:bg-white shadow">
-    &#10095;
-  </button>
 </div>
 
 <script>
@@ -376,7 +573,7 @@
     carousel.style.transform = `translateX(-${index * 100}%)`;
   }
 
-  // Auto-slide every 4 seconds
+  // Auto-slide every 2 seconds
   setInterval(() => moveSlide(1), 4000);
 </script>
 
@@ -387,40 +584,122 @@
    
 
   <!--  Why Partner With Go To Market Solutions Limited -->
-  <section id="why" class="py-16 md:py-24 bg-slate-50">
-    <div class="container grid md:grid-cols-2 gap-10 items-start">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-extrabold">Why Partner With Go To Market Solutions Limited</h2>
-        <ul class="mt-6 space-y-3 text-slate-700 list-disc pl-5">
-          <li>The East African FMCG market is among Africa’s fastest-growing consumer economies, driven by urbanization, population growth, and evolving lifestyles.</li>
-          <li>Consumers are increasingly seeking trusted, affordable, and high-quality brands in foods, personal care, and home care categories.</li>
-          <li>GTM provides end-to-end route-to-market solutions, ensuring rapid market penetration, visibility, and sustainable growth.</li>
-          <li>We believe in long-term, value-based partnerships, treating every supplier’s brand as our own and investing in shared success.</li>
-        </ul>
-      </div>
-      
-  </section>
+<section id="why" class="py-16 md:py-24 bg-slate-50">
+  <div class="container mx-auto max-w-6xl px-4">
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 ring-1 ring-slate-100 p-6">
 
-<!-- Closing CTA -->
-<section class="py-16 md:py-24 text-white" style="background:var(--brand)">
-  <div class="container mx-auto text-center max-w-5xl">
-    <h2 class="text-2xl md:text-3xl font-extrabold leading-snug">
-      At Go To Market Solutions Limited, we don’t just move products — we build lasting brands.<br />
-      We connect global and local suppliers with East African consumers through efficient distribution, strategic marketing, and strong partnerships.
-    </h2>
-    <p class="mt-6 text-white/90 text-base md:text-lg leading-relaxed">
-      By partnering with us, suppliers of foods, personal care, and home care products gain a reliable regional ally committed to driving visibility, growth, and long-term brand success in one of Africa’s most dynamic markets.
-    </p>
+      <h2 class="text-2xl md:text-3xl font-extrabold text-center">Why Partner With Go To Market Solutions Limited</h2>
+<p class="mt-3 text-slate-600 text-base md:text-lg text-center max-w-4xl mx-auto"> We help brands scale across East Africa with disciplined execution and trusted partnerships.</p>
+<ul class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
+  <li class="reveal-bullet opacity-0 translate-y-3 bg-slate-50 border border-slate-100 rounded-xl p-5 text-slate-700">
+    <span class="font-semibold">The East African FMCG market</span> is among Africa’s fastest-growing—driven by urbanization, population growth, and evolving lifestyles.
+  </li>
 
-    <div class="mt-8">
-      <a href="#contact"
-         class="inline-flex px-8 py-3 rounded-xl font-semibold text-slate-900 transition duration-300 hover:opacity-90"
-         style="background:var(--accent)">
-        Get in Touch
-      </a>
+  <li class="reveal-bullet opacity-0 translate-y-3 bg-slate-50 border border-slate-100 rounded-xl p-5 text-slate-700" style="transition-delay:120ms">
+    <span class="font-semibold">Consumers increasingly seek</span> trusted, affordable, high-quality brands in foods, personal care, and home care categories.
+  </li>
+
+  <li class="reveal-bullet opacity-0 translate-y-3 bg-slate-50 border border-slate-100 rounded-xl p-5 text-slate-700" style="transition-delay:240ms">
+    <span class="font-semibold">GTM delivers end-to-end route-to-market</span> for rapid penetration, visibility, and sustainable growth.
+  </li>
+
+  <li class="reveal-bullet opacity-0 translate-y-3 bg-slate-50 border border-slate-100 rounded-xl p-5 text-slate-700" style="transition-delay:360ms">
+    <span class="font-semibold">We build long-term, value-based partnerships</span>—treating every supplier’s brand as our own and investing in shared success.
+  </li>
+</ul>
+  
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll('.reveal-bullet');
+
+    if (reduce || !('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.remove('opacity-0','translate-y-3'));
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.remove('opacity-0','translate-y-3');
+          e.target.classList.add('opacity-100','translate-y-0');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    items.forEach(el => io.observe(el));
+  })();
+</script>
+
+
+
+<!-- Closing CTA -->
+<section class="py-16 md:py-24 text-white" style="background:var(--brand)">
+  <div class="container mx-auto max-w-6xl px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Tighter, consistent heading size -->
+      <h2 class="text-3xl md:text-3xl font-extrabold tracking-tight leading-tight">
+        <span class="block">At Go To Market Solutions Limited, we don’t just move products — we build lasting brands.</span>
+        
+      </h2>
+
+      <!-- subtle accent divider -->
+      <span class="inline-block mt-5 h-1 w-20 rounded-full" style="background:var(--accent)"></span>
+
+      <!-- Bulleted points (uniform size) with scroll-in sequence -->
+      <ul class="mt-6 text-white/90 text-base md:text-base leading-relaxed max-w-3xl mx-auto space-y-3">
+        <li class="list-disc text-left ml-6 opacity-0 translate-y-3 transition-all duration-600 ease-out reveal-cta" style="transition-delay:0ms">
+          We connect global and local suppliers with East African consumers through efficient distribution, strategic marketing, and strong partnerships.
+        </li>
+        <li class="list-disc text-left ml-6 opacity-0 translate-y-3 transition-all duration-600 ease-out reveal-cta" style="transition-delay:120ms">
+          We serve suppliers in foods, personal care, and home care with a reliable regional ally focused on execution.
+        </li>
+        <li class="list-disc text-left ml-6 opacity-0 translate-y-3 transition-all duration-600 ease-out reveal-cta" style="transition-delay:240ms">
+          Our commitment is visibility, growth, and long-term brand success in one of Africa’s most dynamic markets.
+        </li>
+      </ul>
+
+      <div class="mt-10">
+        <a href="#contact"
+           class="inline-flex items-center justify-center px-8 py-3 rounded-full font-semibold text-slate-900
+                  shadow-md ring-1 ring-black/5 transition hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-white/70"
+           style="background:var(--accent)">
+          Get in Touch
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bullet reveal script (add once) -->
+<script>
+  (function () {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = document.querySelectorAll('.reveal-cta');
+
+    if (reduce || !('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.remove('opacity-0','translate-y-3'));
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.remove('opacity-0','translate-y-3');
+          e.target.classList.add('opacity-100','translate-y-0');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    items.forEach(el => io.observe(el));
+  })();
+</script>
 
   <!-- Contact -->
   <section id="contact" class="py-16 md:py-24 bg-white">
@@ -474,8 +753,15 @@
           <p class="mt-1 text-slate-700">+254 722 422 721</p>
         </div>
         <div class="p-5 card bg-slate-50">
-          <p class="font-semibold">Location</p>
-          <p class="mt-1 text-slate-700">Nairobi, Kenya</p>
+          <span class="underline font-semibold">Location</span><br>
+          <p class="mt-1 text-slate-700">
+  Go To Market Solutions Limited<br>
+  4th Floor, Dul Dul Phase III, Block B, Off Mombasa Road<br>
+  P.O. Box 352-00204, Athi-River,<br>
+  Machakos
+</p>
+
+          
         </div>
       </div>
     </div>

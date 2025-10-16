@@ -2,137 +2,1062 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Our Market Overview | Go To Market Solutions Ltd</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Font: Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Inter';
+    :root {
+      --gtm-blue: #047F89;   /* brand blue */
+      --gtm-green: #E0A100;  /* brand accent */
     }
 
-    :root {
-      --gtm-blue: #047F89;  
-      --gtm-green: #E0A100; 
+    /* Font pairing */
+    body, p, a, li, span, button, input {
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4, h5, h6,
+    .heading, .hero-title, .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    /* ---------- Hover animation helpers ---------- */
+    .metric-card {
+      transition: transform 220ms ease, box-shadow 220ms ease;
+      will-change: transform;
+    }
+    .metric-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(0,0,0,.08), 0 10px 10px rgba(0,0,0,.06);
+    }
+
+    .donut, .mini-donut {
+      transition: transform 220ms ease;
+      transform-origin: 50% 50%;
+    }
+    .metric-card:hover .donut,
+    .metric-card:hover .mini-donut {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 6px rgba(224,161,0,.35));
+    }
+
+    .bar-wrap { overflow: hidden; border-radius: 999px; }
+    .bar {
+      background: var(--gtm-green);
+      transition: width 900ms ease-out, filter 220ms ease;
+    }
+    .metric-card:hover .bar { filter: brightness(1.05); }
+
+    @keyframes pulse-kpi {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .kpi-pulse { animation: pulse-kpi 600ms ease-in-out both; }
+
+    /* Badges */
+    .badge {
+      display: inline-flex; align-items: center; gap: .25rem;
+      padding: .2rem .5rem; border-radius: .5rem; font-size: .7rem;
+      background: rgba(4,127,137,.08); color: #0f3c5c; white-space: nowrap;
+    }
+
+    /* ----------- Mobile snap-scroll row for country cards ----------- */
+    .snap-row { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+    .snap-item { scroll-snap-align: start; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ----------- Optional subtle flag marquee ----------- */
+    .flag-marquee { display: flex; gap: 1.25rem; white-space: nowrap; animation: marquee-left 18s linear infinite; opacity: .9; }
+    @keyframes marquee-left { 0% { transform: translateX(0);} 100% { transform: translateX(-50%);} }
+    @media (prefers-reduced-motion: reduce) { .flag-marquee { animation: none; } }
+    .flag-pill { display: inline-flex; align-items: center; justify-content: center; height: 1.75rem; min-width: 1.75rem; padding: 0 .5rem; border-radius: 999px; background: rgba(4,127,137,.10); font-size: 0.95rem; }
+
+    /* ----------- Flag in title ----------- */
+    .flag-emoji { font-size: 1.1rem; line-height: 1; }
+
+    /* ----------- Flip card for details ----------- */
+    .card-3d { perspective: 1000px; }
+    .card-3d-inner {
+      position: relative; transform-style: preserve-3d;
+      transition: transform 600ms ease;
+    }
+    .card-3d.flipped .card-3d-inner { transform: rotateY(180deg); }
+    .card-face { position: relative; backface-visibility: hidden; }
+    .card-back { position: absolute; inset: 0; transform: rotateY(180deg); }
+
+    /* ----------- Mini donuts (per card) ----------- */
+    .donuts { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .75rem; }
+    .mini-donut-label { font-size: 11px; color: #64748b; text-align: center; margin-top: .25rem; }
+
+    /* === DEMO INTERACTIVE ADD-ONS === */
+    .kpi-tile .count-num { display: inline-block; }
+    .age-chart .age-bar { transition: height 900ms ease-out; }
+
+    /* === FLAG MARQUEE: rectangular flags (no circles) === */
+    .flag-img { width: 28px; height: 20px; object-fit: cover; display: block; }
+
+    /* Flags in card titles — keep aspect ratio, no distortion */
+    .flag-icon {
+      height: 14px;
+      width: auto;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: -2px;
+      border-radius: 2px;
     }
   </style>
 </head>
 
 <body class="bg-gray-50 text-slate-800">
-  <!-- Header / Hero Section -->
-  <section class="bg-gradient-to-r from-[var(--gtm-blue)] to-[var(--gtm-blue)] text-white py-16 md:py-20 px-4">
-    <div class="max-w-5xl mx-auto text-center">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Our Market Overview</h1>
-      <p class="text-base sm:text-lg md:text-xl font-light max-w-2xl mx-auto">
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-[var(--gtm-blue)] to-[var(--gtm-blue)] text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-16 md:py-20 text-center">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">Our Market Overview</h1>
+      <p class="mt-4 text-base sm:text-lg md:text-xl/7 max-w-2xl mx-auto font-light">
         Understanding East Africa’s dynamic and fast-growing consumer landscape.
       </p>
     </div>
   </section>
 
-  <!-- Main Content -->
+  <!-- Main -->
   <main class="max-w-6xl mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-16 space-y-12 md:space-y-16">
 
-    <!-- Demographic Overview -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-  <!-- Text Content -->
-  <div>
-    <h2 class="text-2xl sm:text-3xl font-bold text-[var(--gtm-blue)] mb-4 sm:mb-6">
-      East Africa Demographic Overview
-    </h2>
-    <p class="text-base sm:text-lg leading-relaxed">
-      The East African region represents one of the world’s most 
-      <span class="font-semibold">dynamic and fast-growing consumer markets</span>.
-      With a combined population exceeding <strong>315 million people</strong>.
-      
-    </p>
-    <p
-    class="text-base sm:text-lg leading-relaxed">
-    East Africa Demographic Highlights
-<span class=>population Range: 11M (South Sudan) to 68M (Tanzania)
+    <!-- Key Metrics -->
+    
 
-Median Age: Very young populations—mostly between 16.5 and 20 years
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <!-- donuts -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col items-center reveal-chart metric-card">
+          <svg viewBox="0 0 120 120" class="w-28 h-28 donut">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="#E5E7EB" stroke-width="12"/>
+            <circle cx="60" cy="60" r="52" fill="none" stroke="var(--gtm-green)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 999" data-percent="85"/>
+          </svg>
+          <div class="mt-3 text-center">
+            <p class="text-xs uppercase tracking-wider text-slate-500">Mobile Penetration</p>
+            <p class="text-2xl font-extrabold kpi"><span class="count-num" data-target="85">85</span>%</p>
+            <p class="text-xs text-slate-500">Smartphone growth</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col items-center reveal-chart metric-card">
+          <svg viewBox="0 0 120 120" class="w-28 h-28 donut">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="#E5E7EB" stroke-width="12"/>
+            <circle cx="60" cy="60" r="52" fill="none" stroke="var(--gtm-green)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 999" data-percent="48"/>
+          </svg>
+          <div class="mt-3 text-center">
+            <p class="text-xs uppercase tracking-wider text-slate-500">Internet Usage</p>
+            <p class="text-2xl font-extrabold kpi">~<span class="count-num" data-target="48">48</span>%</p>
+            <p class="text-xs text-slate-500">Online population</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col items-center reveal-chart metric-card">
+          <svg viewBox="0 0 120 120" class="w-28 h-28 donut">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="#E5E7EB" stroke-width="12"/>
+            <circle cx="60" cy="60" r="52" fill="none" stroke="var(--gtm-green)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 999" data-percent="33"/>
+          </svg>
+          <div class="mt-3 text-center">
+            <p class="text-xs uppercase tracking-wider text-slate-500">Urbanization</p>
+            <p class="text-2xl font-extrabold kpi">~<span class="count-num" data-target="33">33</span>%</p>
+            <p class="text-xs text-slate-500">Urban dwellers</p>
+          </div>
+        </div>
+        <!-- GDP card aligned like the others -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 flex flex-col items-center reveal-chart metric-card">
+          <!-- visual area sized like the donuts -->
+          <div class="h-28 w-28 flex items-center">
+            <div class="mt-0 h-3 w-full bg-slate-200/70 bar-wrap">
+              <div class="h-full rounded-full bar" style="width:56%" data-bar="56"></div>
+            </div>
+          </div>
+          <div class="mt-3 text-center">
+            <p class="text-xs uppercase tracking-wider text-slate-500">GDP Growth (p.a.)</p>
+            <p class="text-2xl font-extrabold kpi">~<span class="count-num" data-target="6">6</span>%</p>
+            <p class="text-xs text-slate-500">Infra &amp; services led</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-Urbanization: Generally low, ranging from 14% (Burundi) to 37% (Tanzania)
+    <!-- Demographics + Map -->
+    <section aria-labelledby="demo" class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <div>
+        <h3 id="demo" class="text-lg sm:text-xl font-semibold text-[var(--gtm-blue)] mb-2">Customers Across The Region</h3>
 
-Mobile Penetration: Highest in Kenya and Rwanda (87–90%+), lowest in South Sudan (~35%)
 
-Internet Usage: Rwanda leads (~60%), while Burundi and South Sudan lag (~8–11%)
+        <!-- Moving flags -->
+        <div class="overflow-hidden -mx-1 mb-4">
+          <div class="flag-marquee">
+            <!-- First sequence -->
+            <span class="flag-pill"><img src="images/flags/ke.png" alt="Kenya flag"></span>
+            <span class="flag-pill"><img src="images/flags/ug.png" alt="Uganda flag"></span>
+            <span class="flag-pill"><img src="images/flags/tz.png" alt="Tanzania flag"></span>
+            <span class="flag-pill"><img src="images/flags/rw.png" alt="Rwanda flag"></span>
+            <span class="flag-pill"><img src="images/flags/bi.jpg" alt="Burundi flag"></span>
+            <span class="flag-pill"><img src="images/flags/ss.jpg" alt="South Sudan flag"></span>
+            <span class="flag-pill"><img src="images/flags/so.png" alt="Somalia flag"></span>
+            <span class="flag-pill"><img src="images/flags/cd.jpg" alt="DRC flag"></span>
+            <!-- Duplicate for loop -->
+            <span class="flag-pill"><img src="images/flags/ke.png" alt="Kenya flag"></span>
+            <span class="flag-pill"><img src="images/flags/ug.png" alt="Uganda flag"></span>
+            <span class="flag-pill"><img src="images/flags/tz.png" alt="Tanzania flag"></span>
+            <span class="flag-pill"><img src="images/flags/rw.png" alt="Rwanda flag"></span>
+            <span class="flag-pill"><img src="images/flags/bi.jpg" alt="Burundi flag"></span>
+            <span class="flag-pill"><img src="images/flags/ss.jpg" alt="South Sudan flag"></span>
+            <span class="flag-pill"><img src="images/flags/so.png" alt="Somalia flag"></span>
+            <span class="flag-pill"><img src="images/flags/cd.jpg" alt="DRC flag"></span>
+          </div>
+        </div>
 
-GDP Growth: Strongest in Rwanda and Uganda (6–8%), weakest in South Sudan (0–1%)
-</span>
-    </p>
-  </div>
+        <!-- Narrative bullets -->
+        <ul class="space-y-3 text-base sm:text-lg leading-relaxed">
+          <li class="list-disc ml-5">Young, opportunity-driven consumer base</li>
+          <li class="list-disc ml-5">Mobile-first adoption driving discovery & commerce</li>
+          <li class="list-disc ml-5">Urbanization trending upward across the region</li>
+          <li class="list-disc ml-5">Rwanda &amp; Kenya lead in digital inclusion</li>
+        </ul>
 
-  <!-- Map Image -->
-  <div>
-    <img src="images/map.png" alt="Map of East Africa" class="w-full h-auto rounded-lg shadow-md" />
-  </div>
-</section>
+        <!-- Country mini bars -->
+        <div class="mt-6 bg-white rounded-2xl shadow-sm border border-slate-100 p-5 sm:p-6">
+          <p class="text-sm uppercase tracking-wide text-slate-500 mb-3">Country Snapshots</p>
+          <div class="space-y-3">
+            <div class="metric-card p-2 rounded-xl">
+              <div class="flex justify-between text-sm"><span>Kenya: Mobile</span><span>~90%</span></div>
+              <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div class="h-full" style="background:var(--gtm-blue); width:90%"></div>
+              </div>
+            </div>
+            <div class="metric-card p-2 rounded-xl">
+              <div class="flex justify-between text-sm"><span>Rwanda: Internet</span><span>~60%</span></div>
+              <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div class="h-full" style="background:var(--gtm-green); width:60%"></div>
+              </div>
+            </div>
+            <div class="metric-card p-2 rounded-xl">
+              <div class="flex justify-between text-sm"><span>South Sudan: Mobile</span><span>~35%</span></div>
+              <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                <div class="h-full" style="background:var(--gtm-blue); width:35%"></div>
+              </div>
+            </div>
+          </div>
 
-    <!-- Key Demographic Highlights -->
-    <section class="bg-white p-6 sm:p-8 rounded-2xl shadow-md">
-      <h3 class="text-xl sm:text-2xl font-semibold text-[var(--gtm-blue)] mb-4 sm:mb-6">Key Demographic Highlights</h3>
-      <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-base sm:text-lg leading-relaxed">
-        <li><span class="font-semibold">Population:</span> ~315 million (2025 estimate)</li>
-        <li><span class="font-semibold">Median Age:</span> 19 years — representing a young, energetic, and opportunity-driven consumer base.</li>
-        <li><span class="font-semibold">Urbanization:</span> Over 30% of the population now lives in urban centers, fueling growth in retail, housing, transport, and technology sectors.</li>
-        <li><span class="font-semibold">Mobile Penetration:</span> Exceeds 80%, with rising smartphone adoption accelerating digital marketing and e-commerce expansion.</li>
-        <li><span class="font-semibold">Internet Usage:</span> Roughly 45–50% of the population is online, with Kenya and Rwanda leading in digital inclusion.</li>
-        <li><span class="font-semibold">GDP Growth:</span> Regional average of 5–6% annually, fueled by infrastructure, agriculture, and service sector expansion.</li>
-      </ul>
+          <!-- Population Age Structure -->
+          <div class="mt-4 bg-white rounded-2xl shadow-sm border border-slate-100 p-4 metric-card reveal-chart">
+            <p class="text-xs uppercase tracking-wide text-slate-500">Population Age Structure</p>
+
+            <div class="mt-4 flex flex-col gap-2 text-sm">
+
+              <div class="flex items-center justify-between">
+                <span class="text-slate-500 text-[11px] w-10">&lt;15</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full mx-2 overflow-hidden">
+                  <div class="h-full bg-[var(--gtm-blue)]" style="width: 18%;"></div>
+                </div>
+                <span class="shrink-0 w-8 text-right text-[11px] text-slate-600 font-medium">18%</span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-slate-500 text-[11px] w-10">15-24</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full mx-2 overflow-hidden">
+                  <div class="h-full bg-[var(--gtm-blue)]" style="width: 22%;"></div>
+                </div>
+                <span class="shrink-0 w-8 text-right text-[11px] text-slate-600 font-medium">22%</span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-slate-500 text-[11px] w-10">25-34</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full mx-2 overflow-hidden">
+                  <div class="h-full bg-[var(--gtm-blue)]" style="width: 24%;"></div>
+                </div>
+                <span class="shrink-0 w-8 text-right text-[11px] text-slate-600 font-medium">24%</span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-slate-500 text-[11px] w-10">35-44</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full mx-2 overflow-hidden">
+                  <div class="h-full bg-[var(--gtm-blue)]" style="width: 30%;"></div>
+                </div>
+                <span class="shrink-0 w-8 text-right text-[11px] text-slate-600 font-medium">30%</span>
+              </div>
+
+              <div class="flex items-center justify-between">
+                <span class="text-slate-500 text-[11px] w-10">&ge;55</span>
+                <div class="flex-1 h-2 bg-slate-200 rounded-full mx-2 overflow-hidden">
+                  <div class="h-full bg-[var(--gtm-green)]" style="width: 7%;"></div>
+                </div>
+                <span class="shrink-0 w-8 text-right text-[11px] text-slate-600 font-medium">7%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Map + donut -->
+      <div class="space-y-4">
+        <figure class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 reveal-chart metric-card">
+          <img src="images/map.png" alt="Map of East Africa" class="w-full h-auto rounded-lg"/>
+          <figcaption class="text-sm text-slate-600 mt-3 text-center">Core East African markets highlighted.</figcaption>
+        </figure>
+
+        
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 metric-card reveal-chart">
+            <p class="text-xs uppercase tracking-wide text-slate-500 text-center">Urban Population</p>
+            <div class="flex items-center justify-center mt-2">
+              <svg viewBox="0 0 120 120" class="w-28 h-28">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#E5E7EB" stroke-width="12"/>
+                <circle cx="60" cy="60" r="52" fill="none" stroke="var(--gtm-green)" stroke-width="12"stroke-linecap="round" stroke-dasharray="0 999" data-inline-donut="33"></circle>
+                        
+              </svg>
+            </div>
+            <p class="text-center mt-2 text-sm text-slate-600">Over <span class="count-num" data-target="30">30</span>% urban</p>
+          </div>
+        </div>
+    </section>
+
+    <!-- Country Snapshot (EAC + Neighbors) -->
+    <section aria-labelledby="countries" class="space-y-4">
+      <h2 id="countries" class="text-xl sm:text-2xl font-bold text-[var(--gtm-blue)]">Our Regional Footprint</h2>
+
+      <!-- Snap-scroll on mobile; grid on md+ -->
+      <div id="countryRow"
+        class="flex md:grid md:grid-cols-3 gap-5 overflow-x-auto snap-row hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
+
+        <!-- Kenya -->
+        <article class="min-w-[85%] sm:min-w-[60%] md:min-w-0 bg-white rounded-2xl shadow-sm border border-slate-100 p-0 snap-item card-3d metric-card reveal-chart"
+                 data-country="Kenya" data-pop="~58M" data-mobile="90" data-internet="47"
+                 data-median="20" data-urban="29" data-gdp="5–6">
+          <div class="card-3d-inner rounded-2xl">
+            <!-- FRONT -->
+            <div class="card-face p-5">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold flex items-center gap-2">
+                  <img class="flag-icon" src="images/flags/ke.png" alt="Kenya flag">
+                  <span>Kenya</span>
+                </p>
+                <span class="text-xs text-slate-500">Pop: ~58M</span>
+              </div>
+
+              <!-- mini donuts -->
+              <div class="donuts mt-4">
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-green)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="mobile"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Mobile <span class="count-num" data-target="90">0</span>%</div>
+                </div>
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-blue)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="internet"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Internet <span class="count-num" data-target="47">0</span>%</div>
+                </div>
+              </div>
+
+              <!-- bars -->
+              <div class="mt-4 space-y-3">
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Mobile</span><span>90%+</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full bar" data-bar="90"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Internet</span><span>~47%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full" style="background:var(--gtm-blue);" data-bar="47"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3 text-[11px] text-slate-500">Tap/hover for more</div>
+            </div>
+
+            <!-- BACK -->
+            <div class="card-face card-back bg-white rounded-2xl border border-slate-100 p-5">
+              <p class="font-semibold flex items-center gap-2">
+                
+              </p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="badge">Median 20</span>
+                <span class="badge">Urban ~29%</span>
+                <span class="badge">GDP 5–6%</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-600">Nairobi leads digital adoption; strong mobile money penetration.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Uganda -->
+        <article class="min-w-[85%] sm:min-w-[60%] md:min-w-0 bg-white rounded-2xl shadow-sm border border-slate-100 p-0 snap-item card-3d metric-card reveal-chart"
+                 data-country="Uganda" data-pop="~49M" data-mobile="70" data-internet="30"
+                 data-median="16.5" data-urban="27" data-gdp="5–6">
+          <div class="card-3d-inner rounded-2xl">
+            <div class="card-face p-5">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold flex items-center gap-2">
+                  <img class="flag-icon" src="images/flags/ug.png" alt="Uganda flag">
+                  <span>Uganda</span>
+                </p>
+                <span class="text-xs text-slate-500">Pop: ~49M</span>
+              </div>
+              <div class="donuts mt-4">
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-green)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="mobile"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Mobile <span class="count-num" data-target="70">0</span>%</div>
+                </div>
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-blue)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="internet"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Internet <span class="count-num" data-target="30">0</span>%</div>
+                </div>
+              </div>
+              <div class="mt-4 space-y-3">
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Mobile</span><span>~70%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full bar" data-bar="70"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Internet</span><span>~30%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full" style="background:var(--gtm-blue);" data-bar="30"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-3 text-[11px] text-slate-500">Tap/hover for more</div>
+            </div>
+            <div class="card-face card-back bg-white rounded-2xl border border-slate-100 p-5">
+              <p class="font-semibold flex items-center gap-2"></p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="badge">Median 16.5</span>
+                <span class="badge">Urban ~27%</span>
+                <span class="badge">GDP 5–6%</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-600">Youthful market; growing mobile Internet access.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Tanzania -->
+        <article class="min-w-[85%] sm:min-w-[60%] md:min-w-0 bg-white rounded-2xl shadow-sm border border-slate-100 p-0 snap-item card-3d metric-card reveal-chart"
+                 data-country="Tanzania" data-pop="~68M" data-mobile="83" data-internet="35"
+                 data-median="18" data-urban="37" data-gdp="5+">
+          <div class="card-3d-inner rounded-2xl">
+            <div class="card-face p-5">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold flex items-center gap-2">
+                  <img class="flag-icon" src="images/flags/tz.png" alt="Tanzania flag">
+                  <span>Tanzania</span>
+                </p>
+                <span class="text-xs text-slate-500">Pop: ~68M</span>
+              </div>
+              <div class="donuts mt-4">
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-green)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="mobile"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Mobile <span class="count-num" data-target="83">0</span>%</div>
+                </div>
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-blue)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="internet"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Internet <span class="count-num" data-target="35">0</span>%</div>
+                </div>
+              </div>
+              <div class="mt-4 space-y-3">
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Mobile</span><span>~83%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full bar" data-bar="83"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Internet</span><span>~35%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full" style="background:var(--gtm-blue);" data-bar="35"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-3 text-[11px] text-slate-500">Tap/hover for more</div>
+            </div>
+            <div class="card-face card-back bg-white rounded-2xl border border-slate-100 p-5">
+              <p class="font-semibold flex items-center gap-2"></p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="badge">Median 18</span>
+                <span class="badge">Urban ~37%</span>
+                <span class="badge">GDP 5%+</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-600">Expanding urban centers and mobile adoption.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Rwanda -->
+        <article class="min-w-[85%] sm:min-w-[60%] md:min-w-0 bg-white rounded-2xl shadow-sm border border-slate-100 p-0 snap-item card-3d metric-card reveal-chart"
+                 data-country="Rwanda" data-pop="~14M" data-mobile="87" data-internet="60"
+                 data-median="20" data-urban="18" data-gdp="6–7">
+          <div class="card-3d-inner rounded-2xl">
+            <div class="card-face p-5">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold flex items-center gap-2">
+                  <img class="flag-icon" src="images/flags/rw.png" alt="Rwanda flag">
+                  <span>Rwanda</span>
+                </p>
+                <span class="text-xs text-slate-500">Pop: ~14M</span>
+              </div>
+
+              <div class="donuts mt-4">
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-green)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="mobile"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Mobile <span class="count-num" data-target="87">0</span>%</div>
+                </div>
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-blue)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="internet"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Internet <span class="count-num" data-target="60">0</span>%</div>
+                </div>
+              </div>
+
+              <div class="mt-4 space-y-3">
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Mobile</span><span>~87%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full bar" data-bar="87"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Internet</span><span>~60%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full" style="background:var(--gtm-blue);" data-bar="60"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3 text-[11px] text-slate-500">Tap/hover for more</div>
+            </div>
+
+            <div class="card-face card-back bg-white rounded-2xl border border-slate-100 p-5">
+              <p class="font-semibold flex items-center gap-2"></p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="badge">Median 20</span>
+                <span class="badge">Urban ~18%</span>
+                <span class="badge">GDP 6–7%</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-600">High digital inclusion; Kigali fosters startups and innovation.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Burundi -->
+        <article class="min-w-[85%] sm:min-w-[60%] md:min-w-0 bg-white rounded-2xl shadow-sm border border-slate-100 p-0 snap-item card-3d metric-card reveal-chart"
+                 data-country="Burundi" data-pop="~13M" data-mobile="50" data-internet="15"
+                 data-median="17" data-urban="14" data-gdp="3–4">
+          <div class="card-3d-inner rounded-2xl">
+            <div class="card-face p-5">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold flex items-center gap-2">
+                  <img class="flag-icon" src="images/flags/bi.jpg" alt="Burundi flag">
+                  <span>Burundi</span>
+                </p>
+                <span class="text-xs text-slate-500">Pop: ~13M</span>
+              </div>
+
+              <div class="donuts mt-4">
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-green)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="mobile"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Mobile <span class="count-num" data-target="50">0</span>%</div>
+                </div>
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-blue)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="internet"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Internet <span class="count-num" data-target="15">0</span>%</div>
+                </div>
+              </div>
+
+              <div class="mt-4 space-y-3">
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Mobile</span><span>~50%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full bar" data-bar="50"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Internet</span><span>~15%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full" style="background:var(--gtm-blue);" data-bar="15"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3 text-[11px] text-slate-500">Tap/hover for more</div>
+            </div>
+
+            <div class="card-face card-back bg-white rounded-2xl border border-slate-100 p-5">
+              <p class="font-semibold flex items-center gap-2"></p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="badge">Median 17</span>
+                <span class="badge">Urban ~14%</span>
+                <span class="badge">GDP 3–4%</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-600">Small market; connectivity improving from a low base.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- South Sudan -->
+        <article class="min-w-[85%] sm:min-w-[60%] md:min-w-0 bg-white rounded-2xl shadow-sm border border-slate-100 p-0 snap-item card-3d metric-card reveal-chart"
+                 data-country="South Sudan" data-pop="~12M" data-mobile="35" data-internet="10"
+                 data-median="18" data-urban="20" data-gdp="Var.">
+          <div class="card-3d-inner rounded-2xl">
+            <div class="card-face p-5">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold flex items-center gap-2">
+                  <img class="flag-icon" src="images/flags/ss.jpg" alt="South Sudan flag">
+                  <span>South Sudan</span>
+                </p>
+                <span class="text-xs text-slate-500">Pop: ~12M</span>
+              </div>
+
+              <div class="donuts mt-4">
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-green)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="mobile"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Mobile <span class="count-num" data-target="35">0</span>%</div>
+                </div>
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-blue)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="internet"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Internet <span class="count-num" data-target="10">0</span>%</div>
+                </div>
+              </div>
+
+              <div class="mt-4 space-y-3">
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Mobile</span><span>~35%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full bar" data-bar="35"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Internet</span><span>~10%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full" style="background:var(--gtm-blue);" data-bar="10"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3 text-[11px] text-slate-500">Tap/hover for more</div>
+            </div>
+
+            <div class="card-face card-back bg-white rounded-2xl border border-slate-100 p-5">
+              <p class="font-semibold flex items-center gap-2"></p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="badge">Median 18</span>
+                <span class="badge">Urban ~20%</span>
+                <span class="badge">GDP Variable</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-600">Early-stage connectivity; infrastructure build-out underway.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Somalia -->
+        <article class="min-w-[85%] sm:min-w-[60%] md:min-w-0 bg-white rounded-2xl shadow-sm border border-slate-100 p-0 snap-item card-3d metric-card reveal-chart"
+                 data-country="Somalia" data-pop="~18M" data-mobile="75" data-internet="35"
+                 data-median="17.5" data-urban="45" data-gdp="3–4">
+          <div class="card-3d-inner rounded-2xl">
+            <div class="card-face p-5">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold flex items-center gap-2">
+                  <img class="flag-icon" src="images/flags/so.png" alt="Somalia flag">
+                  <span>Somalia</span>
+                </p>
+                <span class="text-xs text-slate-500">Pop: ~18M</span>
+              </div>
+
+              <div class="donuts mt-4">
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-green)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="mobile"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Mobile <span class="count-num" data-target="75">0</span>%</div>
+                </div>
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-blue)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="internet"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Internet <span class="count-num" data-target="35">0</span>%</div>
+                </div>
+              </div>
+
+              <div class="mt-4 space-y-3">
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Mobile</span><span>~75%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full bar" data-bar="75"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Internet</span><span>~35%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full" style="background:var(--gtm-blue);" data-bar="35"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3 text-[11px] text-slate-500">Tap/hover for more</div>
+            </div>
+
+            <div class="card-face card-back bg-white rounded-2xl border border-slate-100 p-5">
+              <p class="font-semibold flex items-center gap-2"></p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="badge">Median 17.5</span>
+                <span class="badge">Urban ~45%</span>
+                <span class="badge">GDP 3–4%</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-600">Mobile money and diaspora links drive digital services.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- DRC -->
+        <article class="min-w-[85%] sm:min-w-[60%] md:min-w-0 bg-white rounded-2xl shadow-sm border border-slate-100 p-0 snap-item card-3d metric-card reveal-chart"
+                 data-country="DRC" data-pop="~105M" data-mobile="60" data-internet="25"
+                 data-median="17" data-urban="47" data-gdp="6–7">
+          <div class="card-3d-inner rounded-2xl">
+            <div class="card-face p-5">
+              <div class="flex items-center justify-between">
+                <p class="font-semibold flex items-center gap-2">
+                  <img class="flag-icon" src="images/flags/cd.jpg" alt="DRC flag">
+                  <span>DRC</span>
+                </p>
+                <span class="text-xs text-slate-500">Pop: ~105M</span>
+              </div>
+
+              <div class="donuts mt-4">
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-green)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="mobile"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Mobile <span class="count-num" data-target="60">0</span>%</div>
+                </div>
+                <div class="flex flex-col items-center">
+                  <svg viewBox="0 0 60 60" class="w-14 h-14 mini-donut">
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="#E5E7EB" stroke-width="8"/>
+                    <circle cx="30" cy="30" r="24" fill="none" stroke="var(--gtm-blue)" stroke-width="8" stroke-linecap="round"
+                            stroke-dasharray="0 999" data-mini="internet"></circle>
+                  </svg>
+                  <div class="mini-donut-label">Internet <span class="count-num" data-target="25">0</span>%</div>
+                </div>
+              </div>
+
+              <div class="mt-4 space-y-3">
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Mobile</span><span>~60%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full bar" data-bar="60"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-xs text-slate-600"><span>Internet</span><span>~25%</span></div>
+                  <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full" style="background:var(--gtm-blue);" data-bar="25"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-3 text-[11px] text-slate-500">Tap/hover for more</div>
+            </div>
+
+            <div class="card-face card-back bg-white rounded-2xl border border-slate-100 p-5">
+              <p class="font-semibold flex items-center gap-2"></p>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <span class="badge">Median 17</span>
+                <span class="badge">Urban ~47%</span>
+                <span class="badge">GDP 6–7%</span>
+              </div>
+              <p class="mt-3 text-sm text-slate-600">Vast population and resources; connectivity rising across cities.</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Regional summary (placeholder) -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-2">
+        <!-- Add any regional tiles here as needed -->
+      </div>
     </section>
 
     <!-- Consumer Landscape -->
-    <section>
-      <h3 class="text-xl sm:text-2xl font-semibold text-[var(--gtm-blue)] mb-3 sm:mb-4">Consumer Landscape</h3>
-      <p class="text-base sm:text-lg leading-relaxed mb-3 sm:mb-4">
-        East African consumers are <strong>young, aspirational, and increasingly digital</strong>.
-        They are influenced by <em>social media, peer communities, and mobile connectivity</em>,
-        creating significant opportunities for <strong>direct engagement, digital advertising, and localized brand storytelling</strong>.
-      </p>
-      <p class="text-base sm:text-lg leading-relaxed">
-        This generation of consumers values <strong>authenticity, accessibility, and innovation</strong>,
-        rewarding brands that align with their lifestyle and speak to their ambitions.
-      </p>
+    <section aria-labelledby="consumer" class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 sm:p-8">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="text-center metric-card p-3 rounded-xl">
+          <div class="mx-auto h-12 w-12 rounded-xl flex items-center justify-center" style="background:rgba(4,127,137,.1)"><span class="text-2xl">📱</span></div>
+          <p class="mt-3 font-medium">Mobile-first journeys</p>
+          <p class="text-sm text-slate-600">Fast checkout & social discovery</p>
+        </div>
+        <div class="text-center metric-card p-3 rounded-xl">
+          <div class="mx-auto h-12 w-12 rounded-xl flex items-center justify-center" style="background:rgba(4,127,137,.1)"><span class="text-2xl">💬</span></div>
+          <p class="mt-3 font-medium">Community & trust</p>
+          <p class="text-sm text-slate-600">Reviews, guarantees, reliability</p>
+        </div>
+        <div class="text-center metric-card p-3 rounded-xl">
+          <div class="mx-auto h-12 w-12 rounded-xl flex items-center justify-center" style="background:rgba(4,127,137,.1)"><span class="text-2xl">🌍</span></div>
+          <p class="mt-3 font-medium">Localized content</p>
+          <p class="text-sm text-slate-600">Cultural fit and relevance</p>
+        </div>
+        <div class="text-center metric-card p-3 rounded-xl">
+          <div class="mx-auto h-12 w-12 rounded-xl flex items-center justify-center" style="background:rgba(4,127,137,.1)"><span class="text-2xl">📈</span></div>
+          <p class="mt-3 font-medium">Value & transparency</p>
+          <p class="text-sm text-slate-600">Clear pricing & benefits</p>
+        </div>
+      </div>
     </section>
 
     <!-- Market Implications -->
-    <section>
-      <h3 class="text-xl sm:text-2xl font-semibold text-[var(--gtm-blue)] mb-3 sm:mb-4">Market Implications for GTM</h3>
-      <p class="text-base sm:text-lg leading-relaxed mb-3 sm:mb-4">
-        For <strong>Go To Market Solutions Ltd</strong>, these trends highlight a region that demands
-        <strong>data-driven strategy, localized content, and omni-channel execution</strong>.
-      </p>
-      <ul class="list-disc list-inside text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
-        <li>Position brands effectively across East African markets.</li>
-        <li>Drive meaningful engagement through targeted, insight-led campaigns.</li>
-        <li>Convert brand visibility into measurable business growth.</li>
-      </ul>
-      <p class="text-base sm:text-lg leading-relaxed">
-        <strong>GTM stands at the forefront of East Africa’s transformation</strong> —
-        bridging global brands with local consumers through strategies that build trust,
-        drive value, and fuel sustainable success.
-      </p>
+    <section aria-labelledby="implications" class="space-y-6">
+      <h2 id="implications" class="text-xl sm:text-2xl font-semibold text-[var(--gtm-blue)]">Turning Insights into actions</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 metric-card">
+          <h4 class="font-semibold text-[var(--gtm-blue)] mb-2">Position</h4>
+          <p class="text-sm leading-relaxed">Tailor propositions per market.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 metric-card">
+          <h4 class="font-semibold text-[var(--gtm-blue)] mb-2">Engage</h4>
+          <p class="text-sm leading-relaxed">Insight-led, targeted campaigns.</p>
+        </div>
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 metric-card">
+          <h4 class="font-semibold text-[var(--gtm-blue)] mb-2">Convert</h4>
+          <p class="text-sm leading-relaxed">Turn visibility into growth.</p>
+        </div>
+      </div>
     </section>
 
-   <!-- Go Back Button -->
-<div class="text-center mt-8 sm:mt-12">
-  <a href="index.html"
-    class="inline-block px-5 sm:px-6 py-2.5 sm:py-3 bg-[var(--gtm-green)] hover:bg-emerald-600 text-white font-semibold rounded-full transition duration-300 shadow-md">
-    ← Go Back
-  </a>
-</div>
-</main>
-
+    <!-- Back -->
+    <div class="text-center pt-2">
+      <a href="index.html"
+         class="inline-flex items-center gap-2 px-6 py-3 bg-[var(--gtm-green)] hover:brightness-95 text-white font-semibold rounded-full transition">
+        ← Go Back
+      </a>
+    </div>
+  </main>
 
   <!-- Footer -->
-  <footer class="bg-[var(--gtm-blue)] text-white text-center py-5 sm:py-6 mt-12 sm:mt-16">
+  <footer class="bg-[var(--gtm-blue)] text-white text-center py-6 mt-12">
     <p class="text-xs sm:text-sm">&copy; 2025 Go To Market Solutions Ltd. All Rights Reserved.</p>
   </footer>
+
+  <!-- Charts / Reveal / Hover-pulse / KPIs / Auto-scroll / Flip -->
+  <script>
+    (function () {
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ---------- Donut charts (top KPIs) ---------- */
+      document.querySelectorAll('circle[data-percent]').forEach(c => {
+        const R = +c.getAttribute('r');
+        const C = 2 * Math.PI * R;
+        const pct = Math.max(0, Math.min(100, +c.dataset.percent || 0));
+        const target = (pct / 100) * C;
+        c.setAttribute('stroke-dasharray', `${target} ${C - target}`);
+        c.setAttribute('transform', 'rotate(-90 60 60)');
+        if (!reduce) c.style.transition = 'stroke-dasharray 900ms ease-out';
+      });
+
+      /* ---------- Bars ---------- */
+      function animateBars(scope=document) {
+        const reduceMotion = reduce;
+        scope.querySelectorAll('[data-bar]').forEach(el => {
+          const w = +el.getAttribute('data-bar') || 0;
+          if (!reduceMotion) {
+            el.style.transition = 'width 900ms ease-out';
+            requestAnimationFrame(() => el.style.width = w + '%');
+          } else {
+            el.style.width = w + '%';
+          }
+        });
+      }
+      animateBars();
+
+      /* ---------- Count-up numbers ---------- */
+      function countUp(el, target, duration=900) {
+        if (reduce) { el.textContent = target; return; }
+        const start = 0;
+        const t0 = performance.now();
+        function tick(now) {
+          const p = Math.min(1, (now - t0)/duration);
+          const val = Math.round(start + (target - start) * p);
+          el.textContent = val;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      // Trigger count-ups when revealed
+      const kpis = document.querySelectorAll('.count-num');
+      const revealObserver = ('IntersectionObserver' in window) ? new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const target = +e.target.dataset.target;
+            countUp(e.target, target, 1000);
+            revealObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.3 }) : null;
+      if (revealObserver) kpis.forEach(k => revealObserver.observe(k));
+
+      /* ---------- Reveal on scroll ---------- */
+      const items = document.querySelectorAll('.reveal-chart');
+      if (!reduce && 'IntersectionObserver' in window) {
+        items.forEach(el => { el.style.opacity = 0; el.style.transform = 'translateY(8px)'; });
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.style.transition = 'opacity 500ms ease-out, transform 500ms ease-out';
+              e.target.style.opacity = 1; e.target.style.transform = 'translateY(0)';
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        items.forEach(el => io.observe(el));
+      }
+
+      /* ---------- KPI hover pulse ---------- */
+      document.querySelectorAll('.metric-card').forEach(card => {
+        const kpi = card.querySelector('.kpi');
+        if (!kpi) return;
+        card.addEventListener('mouseenter', () => {
+          kpi.classList.remove('kpi-pulse'); void kpi.offsetWidth; kpi.classList.add('kpi-pulse');
+        });
+      });
+
+      /* ---------- Mini donuts inside each country card ---------- */
+      function setMiniDonutStroke(circle, pct) {
+        const r = +circle.getAttribute('r');
+        const c = 2 * Math.PI * r;
+        const t = Math.max(0, Math.min(100, pct)) / 100 * c;
+        circle.setAttribute('stroke-dasharray', `${t} ${c - t}`);
+        circle.setAttribute('transform', 'rotate(-90 30 30)');
+        if (!reduce) circle.style.transition = 'stroke-dasharray 900ms ease-out';
+      }
+      function animateCardDonuts(card) {
+        const mPct = +card.dataset.mobile || 0;
+        const iPct = +card.dataset.internet || 0;
+        const mobile = card.querySelector('circle[data-mini="mobile"]');
+        const internet = card.querySelector('circle[data-mini="internet"]');
+        if (mobile) setMiniDonutStroke(mobile, mPct);
+        if (internet) setMiniDonutStroke(internet, iPct);
+        card.querySelectorAll('.mini-donut-label .count-num').forEach(n => countUp(n, +n.dataset.target, 900));
+      }
+
+      // Reveal observer for each country card front face
+      const countryCards = document.querySelectorAll('#countryRow article.card-3d');
+      const cardObserver = ('IntersectionObserver' in window) ? new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            animateBars(e.target);
+            animateCardDonuts(e.target);
+          }
+        });
+      }, { threshold: 0.6 }) : null;
+      if (cardObserver) countryCards.forEach(c => cardObserver.observe(c));
+
+      /* ---------- Flip card (tap/hover) ---------- */
+      countryCards.forEach(card => {
+        card.addEventListener('mouseenter', () => card.classList.add('flipped'));
+        card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
+        card.addEventListener('click', () => card.classList.toggle('flipped'));
+      });
+
+      /* Inline donut (e.g., Urban Population) */
+      function animateInlineDonutCircle(circle, pct) {
+        const r = +circle.getAttribute('r');
+        const c = 2 * Math.PI * r;
+        const cx = +circle.getAttribute('cx') || 60;
+        const cy = +circle.getAttribute('cy') || 60;
+        const t = Math.max(0, Math.min(100, pct)) / 100 * c;
+        circle.setAttribute('stroke-dasharray', `${t} ${c - t}`);
+        circle.setAttribute('transform', `rotate(-90 ${cx} ${cy})`);
+        if (!reduce) circle.style.transition = 'stroke-dasharray 900ms ease-out';
+      }
+      document.querySelectorAll('[data-inline-donut]').forEach(d => {
+        const pct = +d.getAttribute('data-inline-donut') || 0;
+        animateInlineDonutCircle(d, pct);
+      });
+
+      /* Vertical age bars animation (placeholder) */
+      (function animateAgeBars() {
+        const bars = document.querySelectorAll('.age-bar[data-barv]');
+        if (!bars.length) return;
+      })();
+
+      /* Count-up for any KPI tiles */
+      document.querySelectorAll('.kpi-tile .count-num').forEach(n => {
+        const target = +n.dataset.target || 0;
+        const duration = 1000;
+        if (typeof countUp === 'function') { countUp(n, target, duration); return; }
+        if (reduce) { n.textContent = target; return; }
+        const start = 0, t0 = performance.now();
+        (function tick(now) {
+          const p = Math.min(1, (now - t0) / duration);
+          n.textContent = Math.round(start + (target - start) * p);
+          if (p < 1) requestAnimationFrame(tick);
+        })(t0);
+      });
+    })();
+  </script>
 </body>
 </html>
+
